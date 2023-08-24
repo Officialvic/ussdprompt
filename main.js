@@ -19,7 +19,7 @@ function polarisUSSD () {
         2. Airtime Purchase
         3. Transfer`)    
         if (option == 1) {
-            let account = prompt(`Enter your account number`)
+            let account = prompt(`Enter your account number`);
             alert(`Your account balance is ${currency}${balance}`);
             another()
         } else if(option == 2 ) {
@@ -63,7 +63,49 @@ function polarisUSSD () {
                 }
             }
             airtime();
-        } else {
+        } else if(option == 3) {
+            let transfer = () => {
+                let toWho = +prompt(`Select Transfer Beneficiary
+                1. Polaris Bank
+                2. Others`)
+                switch(toWho) {
+                    case 1:
+                        account = prompt(`Enter the account number`);
+                        amount = +prompt(`Enter the amount to transfer`);
+                        pin = +prompt(`Enter your pin`)
+                        newBalance = balance - amount;
+                        switch(pin){
+                            case 1234:
+                                alert(`Transfer Sucessful!!! Your new account balance is  ${currency}${newBalance}`);
+                                another()
+                            break;
+                            default:
+                                alert(`Enter the correct pin`);
+                                transfer();
+                        }
+                    break;
+                    case 2:
+                        bank = prompt(`Enter bank name`);
+                        account = prompt(`Enter the account number`);
+                        pin = +prompt(`Enter your pin`)
+                        newBalance = balance - amount;
+                        switch(pin){
+                            case 1234:
+                                alert(`Transfer Sucessful!!! Your new account balance is ${currency}${newBalance}`);
+                                another()
+                            break;
+                            default:
+                                alert(`Enter the correct pin`);
+                                transfer();
+                        }
+                    break;
+                    default:
+                        alert(`Enter the available option`);
+                        transfer();
+                }
+            }
+            transfer();
+        }else {
             alert(`Kindly enter the available option`)
             USSDTransaction();
         }
